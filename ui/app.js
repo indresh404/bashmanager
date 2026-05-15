@@ -554,7 +554,7 @@ function addTerminal() {
             <span class="dot dot-green"></span>
         </span>
         <span>Terminal ${id}</span> 
-        <button class="cli-tab-close" title="Close" onclick="event.stopPropagation(); closeTerminal(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`;
+        <button class="cli-tab-close" title="Close" aria-label="Close terminal" onclick="event.stopPropagation(); closeTerminal(${id})"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>`;
     tabBtn.onclick = () => switchTerminal(id);
     tabsContainer.insertBefore(tabBtn, document.getElementById('btn-add-tab'));
 
