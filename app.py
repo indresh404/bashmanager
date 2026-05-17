@@ -258,7 +258,7 @@ def exec_command():
     def generate():
         try:
             # Need to format for Windows/Linux subshells correctly
-            args = [shell_cmd, '-c', command] if shell_cmd != 'cmd' else ['cmd', '/c', command]
+            args = [shell_cmd, '-c', command] if shell_cmd != 'cmd.exe' else ['cmd.exe', '/c', command]
             
             proc = subprocess.Popen(
                 args,
@@ -496,16 +496,25 @@ def raise_pr():
 
 def _find_shell():
     """Find available bash shell on the system."""
+    import platform
+    import shutil
     candidates = [
         r'C:\Program Files\Git\bin\bash.exe',
         r'C:\Program Files (x86)\Git\bin\bash.exe',
-        'bash',
-        'sh',
     ]
     for candidate in candidates:
         if os.path.isfile(candidate):
             return candidate
-    return 'bash'
+
+    for shell in ['bash', 'sh']:
+        found = shutil.which(shell)
+        if found:
+            return found
+
+    if platform.system() == 'Windows':
+        return 'cmd.exe'
+
+    return 'sh'
 
 
 def _format_time(seconds):
